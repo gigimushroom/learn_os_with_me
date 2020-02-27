@@ -1,2 +1,2 @@
-# How to build your own OS from scratch
+# Learn OS with me
 

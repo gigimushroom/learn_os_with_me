@@ -1,6 +1,6 @@
 # Table of contents
 
-* [How to build your own OS from scratch](README.md)
+* [Learn OS with me](README.md)
 
 ## Scheduling
 
