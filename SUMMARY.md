@@ -16,6 +16,7 @@
 
 ## Labs
 
+* [Lab 5 Copy-on-Write Fork for xv6](labs/lab-5-copy-on-write-fork-for-xv6.md)
 * [Lab 4 Lazy](labs/lab-4-lazy.md)
 * [Lab 9 mmap](labs/untitled.md)
 
