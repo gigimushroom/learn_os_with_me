@@ -16,5 +16,6 @@
 
 ## Labs
 
+* [Lab 4 Lazy](labs/lab-4-lazy.md)
 * [Lab 9 mmap](labs/untitled.md)
 
