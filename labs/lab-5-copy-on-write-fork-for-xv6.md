@@ -16,7 +16,11 @@ Your task is to implement copy-on-write fork in the xv6 kernel
 
 The goal of copy-on-write \(COW\) fork\(\) is to defer allocating and copying physical memory pages for the child until the copies are actually needed, if ever.
 
-COW fork\(\) creates just a pagetable for the child, with PTEs for user memory pointing to the parent’s physical pages. COW fork\(\) marks all the user PTEs in both parent and child as not writable. Modify `uvmcopy` to do so. `fork` calls this function to allocate child memory.
+{% hint style="info" %}
+COW fork\(\) creates just a pagetable for the child, with PTEs for user memory pointing to the parent’s physical pages. COW fork\(\) marks all the user PTEs in both parent and child as not writable. 
+{% endhint %}
+
+Modify `uvmcopy` to do so. `fork` calls this function to allocate child memory.
 
 ```c
 // Given a parent process’s page table, copy
@@ -59,8 +63,11 @@ uvmcopy(pagetable_t old, pagetable_t new, uint64 sz)
   }
 ```
 
-When either process tries to write one of these COW pages, the CPU will force a page fault. The kernel page-fault handler detects this case, allocates a page of physical memory for the faulting process, copies the original page into the new page, and modifies the relevant PTE in the faulting process to refer to the new page, this time with the PTE marked writeable. When the page fault handler returns, the user process will be able to write its copy of the page. In trap handler,
+{% hint style="info" %}
+When either process tries to write one of these COW pages, the CPU will force a page fault. The kernel page-fault handler detects this case, allocates a page of physical memory for the faulting process, copies the original page into the new page, and modifies the relevant PTE in the faulting process to refer to the new page, this time with the PTE marked writeable. When the page fault handler returns, the user process will be able to write its copy of the page. 
+{% endhint %}
 
+{% code title="trap.c usertrap handler:" %}
 ```c
 else if (r_scause() == 15) {
 // Modify usertrap() to recognize page faults.
@@ -96,6 +103,7 @@ else if (r_scause() == 15) {
   }
   ...
 ```
+{% endcode %}
 
 COW fork\(\) makes freeing of the physical pages that implement user memory a little trickier. A given physical page may be referred to by multiple processes’ page tables, and should be freed only when the last reference disappears.
 
@@ -179,9 +187,9 @@ Reference:
 
 [https://pdos.csail.mit.edu/6.828/2019/labs/cow.html](https://pdos.csail.mit.edu/6.828/2019/labs/cow.html)
 
+Result
 
-
-
+![](../.gitbook/assets/screen-shot-2020-02-28-at-3.42.25-pm.png)
 
 
 

@@ -110,11 +110,17 @@ sys_sbrk(void)
 
 Modify the code in trap.c to respond to a page fault from user space by mapping a newly-allocated page of physical memory at the faulting address, and then returning back to user space to let the process continue executing.
 
-#### Hints
+{% hint style="info" %}
+Check whether a fault is a page fault by seeing if `r_scause()` is 13 or 15 in `usertrap()`.
+{% endhint %}
 
-1. Check whether a fault is a page fault by seeing if r\_scause\(\) is 13 or 15 in usertrap\(\).
-2. Look at the arguments to the printf\(\) in usertrap\(\) that reports the page fault, in order to see how to find the virtual address that caused the page fault.
-3. Use PGROUNDDOWN\(va\) to round the faulting virtual address down to a page boundary.
+{% hint style="info" %}
+Look at the arguments to the printf\(\) in `usertrap()` that reports the page fault, in order to see how to find the virtual address that caused the page fault.
+{% endhint %}
+
+{% hint style="info" %}
+Use `PGROUNDDOWN(va)` to round the faulting virtual address down to a page boundary.
+{% endhint %}
 
 ### Solution
 
