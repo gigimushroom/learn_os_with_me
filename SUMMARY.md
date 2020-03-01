@@ -6,6 +6,10 @@
 
 * [XV6 File System](virtual-memory/fs.md)
 
+## Traps and Interrupts
+
+* [Untitled](traps-and-interrupts/untitled.md)
+
 ## Scheduling
 
 * [XV6 CPU Scheduling](scheduling/xv6-cpu-scheduling.md)
@@ -24,4 +28,8 @@
 * [Lab 8 File System: Large Files](labs/lab-8-file-system-large-files.md)
 * [Lab 8 File System: Symbolic links](labs/lab-8-file-system-symbolic-links.md)
 * [Lab 9 mmap](labs/untitled.md)
+
+## Lock
+
+* [Untitled](lock/untitled.md)
 
