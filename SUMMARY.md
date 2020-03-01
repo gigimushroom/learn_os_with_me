@@ -10,7 +10,7 @@
 
 * [XV6 File System](file-system/fs.md)
 
-## Virtual Memory
+## Memory Management <a id="virtual-memory"></a>
 
 * [XV6 Virtual Memory](virtual-memory/xv6-virtual-memory.md)
 
