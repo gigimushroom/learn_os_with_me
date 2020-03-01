@@ -18,6 +18,10 @@
 
 * [XV6 Virtual Memory](file-system/xv6-virtual-memory.md)
 
+## Lock
+
+* [Untitled](lock/untitled.md)
+
 ## Labs
 
 * [Lab 4 Lazy](labs/lab-4-lazy.md)
@@ -28,8 +32,4 @@
 * [Lab 8 File System: Large Files](labs/lab-8-file-system-large-files.md)
 * [Lab 8 File System: Symbolic links](labs/lab-8-file-system-symbolic-links.md)
 * [Lab 9 mmap](labs/untitled.md)
-
-## Lock
-
-* [Untitled](lock/untitled.md)
 
