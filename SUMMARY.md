@@ -2,17 +2,17 @@
 
 * [Learn OS with me](README.md)
 
+## Memory Management <a id="virtual-memory"></a>
+
+* [XV6 File System](virtual-memory/fs.md)
+
 ## Scheduling
 
 * [XV6 CPU Scheduling](scheduling/xv6-cpu-scheduling.md)
 
 ## File System
 
-* [XV6 File System](file-system/fs.md)
-
-## Memory Management <a id="virtual-memory"></a>
-
-* [XV6 Virtual Memory](virtual-memory/xv6-virtual-memory.md)
+* [XV6 Virtual Memory](file-system/xv6-virtual-memory.md)
 
 ## Labs
 
