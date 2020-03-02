@@ -30,6 +30,7 @@
 * [Lab 6 RISC-V assembly](labs/lab-6-risc-v-assembly.md)
 * [Lab 6 Uthread: switching between threads](labs/lab-6-uthread-switching-between-threads.md)
 * [Lab 6 Alarm](labs/lab-6-alarm.md)
+* [Lab 7 Lock](labs/lab-7-lock.md)
 * [Lab 8 File System: Large Files](labs/lab-8-file-system-large-files.md)
 * [Lab 8 File System: Symbolic links](labs/lab-8-file-system-symbolic-links.md)
 * [Lab 9 mmap](labs/untitled.md)
