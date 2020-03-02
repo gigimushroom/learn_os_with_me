@@ -25,6 +25,7 @@
 ## Labs
 
 * [Lab 1 Xv6 and Unix utilities](labs/lab-1-xv6-and-unix-utilities.md)
+* [Lab 3 Buddy Allocator](labs/lab-3-buddy-allocator.md)
 * [Lab 4 Lazy](labs/lab-4-lazy.md)
 * [Lab 5 Copy-on-Write Fork for xv6](labs/lab-5-copy-on-write-fork-for-xv6.md)
 * [Lab 6 RISC-V assembly](labs/lab-6-risc-v-assembly.md)
