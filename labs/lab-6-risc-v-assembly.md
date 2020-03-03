@@ -93,3 +93,7 @@ store a double world. Store 64 bits from s0 register to sp+8
 
 ![](../.gitbook/assets/image%20%287%29.png)
 
+## 心得
+
+汇编在现代社会不再是必需品。太多高级语言包装了一切，蒙蔽了最初的最原始的思想，可是无论装饰再如何精彩，都遮挡不了最初最美的风景。那里才是我的追求。
+

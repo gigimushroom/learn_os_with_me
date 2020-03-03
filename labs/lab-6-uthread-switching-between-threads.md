@@ -403,3 +403,7 @@ main(int *argc*, char **argv*[])
 }
 ```
 
+## 心得
+
+过去五年一直不理解的coroutine现在顿悟了，x86的繁琐和陈旧被risc-v的精简直接击垮。纤程的本质就是conext switch，将储存器存入stack, 将另一个纤程的储存器从它的stack读出，将program counter设置好，这，就是fiber.
+

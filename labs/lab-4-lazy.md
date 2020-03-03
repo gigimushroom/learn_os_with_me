@@ -266,5 +266,7 @@ copyin(pagetable_t pagetable, char *dst, uint64 srcva, uint64 len)
 
 **Result**
 
-![](../.gitbook/assets/screen-shot-2020-02-28-at-11.06.46-am.png)
+## 心得
+
+中断是操作系统的核心，利用中断来做Lazy allocation也是精妙的思想。最终要解决的问题是不要过多分配完全不使用的内存给用户。用多少拿多少。
 
