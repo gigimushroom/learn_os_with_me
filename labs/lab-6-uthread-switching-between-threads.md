@@ -109,7 +109,7 @@ Note:
 
 ### Implement context switch
 
-```text
+```c
     .text
 
 /* Switch from current_thread to next thread_thread, and make
