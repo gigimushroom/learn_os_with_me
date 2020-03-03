@@ -329,3 +329,7 @@ main(int *argc*, char **argv*[])
 2. `pipe` does not close if write part fd is closed. So we can do: write everything to `p[1]`, close `p[1]’s fd`, then read from `p[0]`.
 3. Think more why we designed this way, not just make it working and leave.
 
+## 心得
+
+C程序短小精悍。在unix的世界里数个小部件拼接成大项目。每一个bit都来的有缘由, 没有多余的内存用来浪费。这才是编程的精髓吧。
+

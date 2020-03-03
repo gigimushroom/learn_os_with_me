@@ -123,3 +123,7 @@ In `bd_init`, change from `sz = sizeof(char)* ROUNDUP(NBLK(k), 8)/8;` To: `sz = 
 
 ## Next Step?
 
+## 心得
+
+伙伴算法的初始化有多种方式, xv6的实现非常精妙。我花费了很多时间理解大师的思想，最后发现**可视化**是最佳理解方法了。花了很多图，最终一目了然。
+
