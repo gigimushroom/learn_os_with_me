@@ -82,3 +82,7 @@ Improve `bmap` to support this double indirect: 1. Load double indirect block, a
     }
 ```
 
+## 心得
+
+画图是最好的解答之一，再把画出的设计图实现，就是编程。
+

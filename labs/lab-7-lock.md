@@ -237,3 +237,7 @@ Lock contention is a hard to solve problem. My buffer cache solution is a little
 
 All tests except `writebig` and `bigdir` tests have passed.
 
+## 心得
+
+锁真的很难，concurrency更难，这一章我只接触了冰山一角，但是我知道每一个坑只有踩过才会深刻，有些人生的锁，必须自己才能解开。
+
