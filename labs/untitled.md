@@ -48,7 +48,7 @@ struct vm_area_struct {
 
 Each Process has a fixed-size array of VMAs
 
-```text
+```c
 // Per-process state*
 struct proc {
   …
@@ -97,7 +97,7 @@ We design the **initial max** virtual address of VMA is `MAXVA - 2 * PGSIZE`, wh
 Check that mmap doesn’t allow read/write mapping of a file opened read-only.
 
 ```c
-struct proc *p = myproc();
+  struct proc *p = myproc();
   struct file *f = p->ofile[fd];
   if (flags & MAP_SHARED) {
     if (!(f->writable) && (prot & PROT_WRITE)) {
@@ -120,9 +120,22 @@ Add code to cause a page-fault in a mmap-ed region to allocate a page of physica
 
 #### code
 
+Read file from offset.
+
+```c
+int mmap_read(struct file *f, uint64 va, int off, int size) {
+  ilock(f->ip);
+  // read to user space VA.
+  int n = readi(f->ip, 1, va, off, size);
+  off+=n;
+  iunlock(f->ip);
+  return off;
+} 
+```
+
 In trap handler:
 
-```text
+```c
 if (r_scause() == 13 || r_scause() == 15) {
     printf(“usertrap(): mmap page fault %p (%s) pid=%d\n”, r_scause(), scause_desc(r_scause()), p->pid);
 
@@ -186,8 +199,8 @@ Note: The file reading offset is `page_fault_addr - VMA->start`. The reason behi
 
 **Find VMA to free**
 
-```text
-uint64 start_base = PGROUNDDOWN(addr);
+```c
+  uint64 start_base = PGROUNDDOWN(addr);
   uint64 end_base = PGROUNDDOWN(addr + size);
 
   struct proc *p = myproc();
@@ -209,7 +222,7 @@ uint64 start_base = PGROUNDDOWN(addr);
 
 **Write back if Shared flag is set**
 
-```text
+```c
   if (vm->flags & MAP_SHARED) {
     printf(“….We need to write back file\n”);
     struct file *f = vm->file;
@@ -223,7 +236,7 @@ uint64 start_base = PGROUNDDOWN(addr);
 
 **Remove mappings from a page table**
 
-```text
+```c
   pte_t *pte;
   for(int I = start_base; I <= end_base; I+=PGSIZE){
     if((pte = walk(p->pagetable, I, 0)) == 0) {
@@ -236,7 +249,7 @@ uint64 start_base = PGROUNDDOWN(addr);
 
 **Fix VMA metadata**
 
-```text
+```c
   if (vm->start_ad == start_base && end_base < vm->end_ad) {
     vm->start_ad = end_base;
     vm->len -= size;
@@ -271,7 +284,7 @@ void free_all_vma(pagetable_t pagetable, uint64 start, uint64 end) {
 
 Free all VMA areas
 
-```text
+```c
 struct vm_area_struct *vm = 0;
   for (int I=0; I<100; I++) {
     if (p->vma[I].valid == 0) {
@@ -287,7 +300,7 @@ struct vm_area_struct *vm = 0;
 
 Helper
 
-```text
+```c
 void copy_vma(struct vm_area_struct *dst, struct vm_area_struct *src) {
   dst->valid = 1;
   dst->start_ad = src->start_ad;
@@ -303,7 +316,7 @@ void copy_vma(struct vm_area_struct *dst, struct vm_area_struct *src) {
 
 Copy VMA areas from Parent to Child
 
-```text
+```c
   for (int I=0; I<100; I++) {
     if (p->vma[I].valid == 1) {
       struct vm_area_struct *src = 0;
@@ -331,4 +344,18 @@ Copy VMA areas from Parent to Child
 * Remove redundancy between your implementation for lazy allocation and your implementation of mmap-ed files. \(Hint: create a VMA for the lazy allocation area.\)
 * Modify exec to use a VMA for different sections of the binary so that you get on-demand-paged executables. This will make starting programs faster, because exec will not have to read any data from the file system.
 * Implement page-out and page-in: have the kernel move some parts of processes to disk when physical memory is low. Then, page in the paged-out memory when the process references it.
+
+## 心得
+
+花费了好多小时在思考offset的设计。一直百思不得其解，各种尝试出错。
+
+反思的时候，发现作业要求都讲清楚了。file从offset 0被map到VMA的start address，所以要访问一个虚拟地址，就是从这个地址到对应VMA起始地址的距离。`offset = distance(VA - VMA's start_addr)`
+
+无须记录任何offset in VMA, 只要trap handler读取文件的时候使用正确的offset。
+
+做事必须了解为什么要做。mmap的存在到底是为了什么？是因为可以减少一次用户copy。正常的文件读取要放在Buffer cache, 再复制到用户的空间。mmap只需要放入buffer cache即可。
+
+xv6的基础实现并没有这一优化，和正常文件读取一样。但是挑战题要求了实现。
+
+mmap这一实验只是实现了其中一个功能，还有更多的细节和功能在真正的操作系统里完全实现。工程的复杂度根本不是普通程序员可以想象的。
 
