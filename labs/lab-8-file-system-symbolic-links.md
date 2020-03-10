@@ -203,9 +203,13 @@ bread(uint dev, uint blockno)
 
 软连接和硬链接的不同是什么呢？
 
-_A hard link is an additional name for an existing file_, which can be in different directory in the same device. File\(`inode`\) can be freed if both number of hard links and number of references are 0.
+Term `inode` in OS represents an actual file in disk. A directory contains multiple directory files, each has an `inode` number, and a file name. The number is its actual file's `inode` id.
 
-软连接就是一个可有可无的索引，虽然也是一个存在directory下面的file \(`inode`\)，但是所指的目标可以不存在，或者在另一个device.
+_A hard link is an additional name for an existing file_. It is a directory file which points to the actual file, and has its own name. The `inode` in OS has metadata to track the number of links to this file. 
+
+File\(`inode`\) can be freed if both number of hard links and number of references are 0.
+
+软连接就是一个可有可无的索引，虽然也是一个存在directory下面的directory file，但是所指的目标可以不存在，或者在另一个device.
 
 硬链接就是真正的恋人关系，是真的存在，生活中都有彼此的印记。
 
