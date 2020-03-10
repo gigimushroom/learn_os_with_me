@@ -203,9 +203,9 @@ bread(uint dev, uint blockno)
 
 软连接和硬链接的不同是什么呢？
 
-Term `inode` in OS represents an actual file in disk. A directory contains multiple directory files, each has an `inode` number, and a file name. The number is the pointed file `inode`number.
+Term `dinode` in OS represents an actual file in disk with metadata. A directory contains multiple `dirent`, each has an `inode` number, and a file name. Each `dirent` points to an actual file, its number is set to the file's `inode` number.
 
-_A hard link is an additional name for an existing file_. It is another directory file which points to the actual file, and has its own name. The actual file's`inode` metadata tracks the number of links to this file. 
+_A hard link is an additional name for an existing file_. It is another`dirent` which points to the actual file. The metadata in `dinode`tracks the number of links to this file. 
 
 File\(`inode`\) can be freed if both number of hard links and number of references are 0.
 
