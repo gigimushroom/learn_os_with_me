@@ -203,11 +203,11 @@ bread(uint dev, uint blockno)
 
 软连接和硬链接的不同是什么呢？
 
-Term `dinode` in OS represents an actual file in disk with metadata. A directory contains multiple `dirent`, each has an `inode` number, and a file name. Each `dirent` points to an actual file, its number is set to the file's `inode` number.
+Term `dinode` in OS represents an actual file in disk with metadata. A directory contains multiple `dirent`, each has an `inode` number, and a file name. Each `dirent` points to an actual file, its number is set to the file's `dinode` number.
 
 _A hard link is an additional name for an existing file_. It is another`dirent` which points to the actual file. The metadata in `dinode`tracks the number of links to this file. 
 
-File\(`inode`\) can be freed if both number of hard links and number of references are 0.
+File\(`dinode`\) can be freed if both number of hard links and number of references are 0.
 
 软连接就是一个可有可无的索引，虽然也是一个存在directory下面的directory file，但是所指的目标可以不存在，或者在另一个device.
 
