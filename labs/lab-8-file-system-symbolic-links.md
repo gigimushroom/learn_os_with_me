@@ -201,7 +201,11 @@ bread(uint dev, uint blockno)
 
 ## 心得
 
-软连接和硬链接的不同是什么呢？硬链接是number of links to a disk inode，inode只有在没有reference也没有link才会被free。软连接就是一个可有可无的索引，虽然也是一个真实存在的inode on disk，但是所指的目标也可以不存在或者在另一个device.
+软连接和硬链接的不同是什么呢？
+
+_A hard link is an additional name for an existing file_, which can be in different directory in the same device. File\(`inode`\) can be freed if both number of hard links and number of references are 0.
+
+软连接就是一个可有可无的索引，虽然也是一个真实存在的inode on disk，但是所指的目标也可以不存在或者在另一个device.
 
 硬链接就是真正的恋人关系，是真的存在，生活中都有彼此的印记。
 
