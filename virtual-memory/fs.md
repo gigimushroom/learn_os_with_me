@@ -1,6 +1,6 @@
 # XV6 File System
 
-![](../.gitbook/assets/image%20%2810%29.png)
+![](../.gitbook/assets/image%20%2811%29.png)
 
 ### Buffer Cache
 
@@ -123,7 +123,7 @@ end_op();
 
 The term node can refer 2 things: 1. On disk data structure contains file’s size and list of data blocks numbers. 2. Refer to in-memory node, contains a copy of the on-disk node and extra info. 
 
-![](../.gitbook/assets/image%20%2812%29.png)
+![](../.gitbook/assets/image%20%2813%29.png)
 
 ```text
 // On-disk inode structure
