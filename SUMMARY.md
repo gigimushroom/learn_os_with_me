@@ -20,7 +20,7 @@
 
 ## Lock
 
-* [Untitled](lock/untitled.md)
+* [Spinlock](lock/untitled.md)
 
 ## Labs
 
