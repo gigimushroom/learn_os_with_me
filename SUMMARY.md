@@ -8,7 +8,7 @@
 
 ## Traps and Interrupts
 
-* [Untitled](traps-and-interrupts/untitled.md)
+* [How system calls get into/out of the kernel](traps-and-interrupts/untitled.md)
 
 ## Scheduling
 
