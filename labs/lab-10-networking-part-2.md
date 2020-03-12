@@ -25,7 +25,7 @@ hello world!
 
 ### How it works end to end
 
-#### How `socket connect`, and `socket_write` work?
+#### How `sys_connect`, and `sys_write` work?
 
 ![](../.gitbook/assets/image%20%283%29.png)
 
