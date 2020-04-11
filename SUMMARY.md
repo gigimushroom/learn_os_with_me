@@ -32,11 +32,17 @@
 * [Overview and Disk Layout](file-system/overview-and-disk-layout.md)
 * [Buffer Cache](file-system/buffer-cache.md)
 * [Design Inode Layer](file-system/design-inode-layer.md)
+* [Inode Content](file-system/inode-content.md)
 * [Block Allocator](file-system/block-allocator.md)
 * [Design a log system for crash recovery](file-system/design-a-log-system-for-crash-recovery.md)
-* [Untitled](file-system/untitled-2.md)
-* [Untitled](file-system/untitled.md)
+* [Directory Layer](file-system/directory-layer.md)
+* [Path names](file-system/path-names.md)
+* [File Descriptor Layer](file-system/untitled-2.md)
+* [FS System Calls](file-system/untitled.md)
+* [XV6 VS Real World](file-system/xv6-vs-real-world.md)
 * [Make Xv6 File disk management system](file-system/make-xv6-file-disk-management-system.md)
+* [Write FS simulator in python](file-system/write-fs-simulator-in-python.md)
+* [How Redirect Shell command works](file-system/how-redirect-shell-command-works.md)
 
 ## Lock
 
