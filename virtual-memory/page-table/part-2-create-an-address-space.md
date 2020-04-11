@@ -29,26 +29,31 @@ Write physical address of the root page-table page into per CPU register satp. A
 1. For process p, allocate 1 pages using buddy allocator for this process’s kernel stack.
 2. Map it high in memory with permission X \| W.
 3. Set it to be followed by an invalid guard page. This virtual page does not allocated in physical memory, it just occupies some space in process VM address space. Any access to those will trigger kernel panic.
+4. Reloads the kernel page table into satp so that hardware knows about the new PTEs. \(Including flush TLB buffer cache\)
 
-   \`\`\`
+```c
+/// map kernel stacks beneath the trampoline,/
+/// each surrounded by invalid guard pages./
+#define KSTACK(p) (TRAMPOLINE - ((p)+1)* 2*PGSIZE)
 
-   /// map kernel stacks beneath the trampoline,/
-
-   /// each surrounded by invalid guard pages./
-
-   **define KSTACK\(p\) \(TRAMPOLINE - \(\(p\)+1\)** _**2**_**PGSIZE\)**
-
-// Allocate a page for the process's kernel stack./ // Map it high in memory, followed by an invalid/ // guard page char \*pa = kalloc\(\); if\(pa == 0\) panic\(“kalloc”\); uint64 va = KSTACK\(\(int\) \(p - proc\)\); kvmmap\(va, \(uint64\)pa, PGSIZE, PTE\_R \| PTE\_W\); p-&gt;kstack = va;
-
-\`\`\`
-
-1. Reloads the kernel page table into satp so that hardware knows about the new PTEs. \(Including flush TLB buffer cache\)
+// Allocate a page for the process's kernel stack./
+// Map it high in memory, followed by an invalid/
+// guard page
+char *pa = kalloc();
+if(pa == 0)
+  panic(“kalloc”);
+uint64 va = KSTACK((int) (p - proc));
+kvmmap(va, (uint64)pa, PGSIZE, PTE_R | PTE_W);
+p->kstack = va;
+```
 
 ### Process has its own Page Table.
 
 Different than the kernel one. The root page-table page needs to set in satp register when CPU is currently running this process. Process struct saves kernel root page-table address, so allows to switch to/from kernel.
 
-\*\*\[\[Page Tables \(part 3\) - How Page Table is used?\]\]
+{% page-ref page="part-3-how-page-table-is-used.md" %}
+
+
 
 ## system/kernel/memory
 
