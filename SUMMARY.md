@@ -68,5 +68,8 @@
 ## Hardware, Device, Assembly
 
 * [RISC-V assembly](hardware-device-assembly/risc-v-assembly.md)
+* [Start xv6 and the first process](hardware-device-assembly/start-xv6-and-the-first-process.md)
+* [Why first user process loads another program?](hardware-device-assembly/why-first-user-process-loads-another-program.md)
+* [What does kernel.ld do in XV6?](hardware-device-assembly/what-does-kernel.ld-do-in-xv6.md)
 * [XV6 Device Driver](hardware-device-assembly/xv6-device-driver.md)
 
