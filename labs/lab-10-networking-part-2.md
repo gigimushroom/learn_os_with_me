@@ -27,17 +27,17 @@ hello world!
 
 #### How `sys_connect`, and `sys_write` work?
 
-![](../.gitbook/assets/image%20%2813%29.png)
+![](../.gitbook/assets/image%20%2817%29.png)
 
 #### How receiving a packet work end to end?
 
 \(from E1000 hardware, to trap handler, to user space\)
 
-![](../.gitbook/assets/image%20%2815%29.png)
+![](../.gitbook/assets/image%20%2819%29.png)
 
 #### How reading a socket works?
 
-![](../.gitbook/assets/image%20%2821%29.png)
+![](../.gitbook/assets/image%20%2826%29.png)
 
 ### Code
 

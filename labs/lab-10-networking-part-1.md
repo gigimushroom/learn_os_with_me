@@ -125,7 +125,7 @@ e1000_init((uint32*)e1000_regs);
 
 ### How Transmit work in hardware?
 
-![](../.gitbook/assets/image%20%2831%29.png)
+![](../.gitbook/assets/image%20%2837%29.png)
 
 `[Head, Tail)` contains all the packets that are about to sent to outside by the hardware \(E1000\).
 
@@ -182,7 +182,7 @@ int e1000_transmit(struct mbuf **m*)
 
 Hardware maintains a circular ring of descriptors. Between Head and Tail, are the empty buffers that hardware writes when new packets arrive. As packets arrive, they are stored in memory and the head pointer is incremented by hardware.
 
-![](../.gitbook/assets/image%20%287%29.png)
+![](../.gitbook/assets/image%20%288%29.png)
 
 The `tail` points to the last empty buffer that hardware owns for receiving new packets.
 

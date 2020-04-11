@@ -17,11 +17,11 @@ $ od -xc test.txt
 
 The Command
 
-![](../.gitbook/assets/image%20%2825%29.png)
+![](../.gitbook/assets/image%20%2830%29.png)
 
 `od` man page
 
-![](../.gitbook/assets/image%20%2826%29.png)
+![](../.gitbook/assets/image%20%2832%29.png)
 
 `-t` is the output format. `x` is hex. `c` is chars in default char set.
 

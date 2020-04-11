@@ -18,7 +18,7 @@ a RISC-V page table is logically an array of 2^27 \(134,217,728\) page table ent
 
 the actual translation happens in three steps.
 
-![](../../.gitbook/assets/image%20%286%29.png)
+![](../../.gitbook/assets/image%20%287%29.png)
 
 kernel must write the physical address of the root page-table page into the `satp` register. Each CPU has its own `satp`.
 
