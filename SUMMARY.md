@@ -23,7 +23,7 @@
   * [Part 2: Create an Address Space](virtual-memory/page-table/part-2-create-an-address-space.md)
   * [Part 3: How Page Table is used](virtual-memory/page-table/part-3-how-page-table-is-used.md)
   * [Part 4: Page Fault and Swap](virtual-memory/page-table/part-4-page-fault-and-swap.md)
-* [Untitled](virtual-memory/untitled-1.md)
+* [xv6 buddy allocator](virtual-memory/untitled-1.md)
 * [Untitled](virtual-memory/untitled.md)
 
 ## Traps and Interrupts
