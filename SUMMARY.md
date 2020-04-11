@@ -12,9 +12,12 @@
 
 ## OS Organization
 
-* [Untitled](os-organization/untitled.md)
+* [OS Organization](os-organization/untitled.md)
+* [Challenge yourself](os-organization/challenge-yourself.md)
 
 ## Memory Management <a id="virtual-memory"></a>
+
+* [XV6 Virtual Memory](virtual-memory/xv6-virtual-memory.md)
 
 ## Traps and Interrupts
 
@@ -25,8 +28,6 @@
 * [XV6 CPU Scheduling](scheduling/xv6-cpu-scheduling.md)
 
 ## File System
-
-* [XV6 Virtual Memory](file-system/xv6-virtual-memory.md)
 
 ## Lock
 
