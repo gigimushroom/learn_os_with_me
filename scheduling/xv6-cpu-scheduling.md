@@ -1,18 +1,20 @@
 # XV6 CPU Scheduling
 
-Why we design scheduling? To time-share the CPUs among the processes.
+## Why we design scheduling? 
 
-### How xv6 achieves multiplexing?
+To time-share the CPUs among the processes.
+
+## How xv6 achieves multiplexing?
 
 Xv6 multiplexes by switching each CPU from one process to another in 2 situations: 1. Sleep and wake mechanism 2. Timer fired for a process running for long periods
 
 This multiplexing creates an illusion that each process has its own CPU!
 
-### How kernel does the context switch visualized?
+## How kernel does the context switch visualized?
 
 ![](../.gitbook/assets/image%20%282%29.png)
 
-### How to implement context switch?
+## How to implement context switch?
 
 #### Preparation:
 
@@ -101,18 +103,18 @@ swtch:
 
 1. Process A calling yield\(\) to give up CPU.
 2. yield\(\) calls sched\(\), which internally calls the context switch function above.
-3. The switch assembly func saves the A’s context on A’s stack. **\(I thought in kernel’s process stack?\)** ::Yes, the process state are all saved in kernel process stack.::
+3. The switch assembly func saves the A’s context on A’s stack. **\(I thought in kernel’s process stack?\)** Yes, the process state are all saved in kernel process stack.
 4. Switch restores scheduler context, and jump immediately to scheduler last saved checkpoint. It does not return back to A.
 5. Scheduler is going to run next available process. 
 6. Eventually scheduler will resume process A, and calling swtch\(\) to resume where process A left before.
 
-### Let’s take a closer look to see How scheduler works
+## Let’s take a closer look to see How scheduler works
 
 Any process is willing to give up Cpu must do the following: 1. Acquire its own process lock. 2. Release any other locks its holding 3. Update its own state 4. Call sched\(\) C function. Yield\(\), Sleep\(\), exit\(\) all follows this conversion.
 
 Scheduler code
 
-```text
+```c
 *// Per-CPU process scheduler.*
 *// Each CPU calls scheduler() after setting itself up.*
 *// Scheduler never returns.  It loops, doing:*
@@ -179,13 +181,17 @@ myproc(void) {
 
 The return value of myproc is safe to use even if interrupts are enabled: if a timer interrupt moves the calling process to a different CPU, its struct proc pointer will stay the same.
 
+### Graph
+
+![](../.gitbook/assets/image%20%2811%29.png)
+
 ## How process intentionally interact with each other?
 
 Use sleep and wakeup.
 
 ### How it is used?
 
-```text
+```c
 Void V(struct semaphore *s) 
 {
   acquire(&s->lock);
@@ -265,82 +271,6 @@ A few things:
 * Scheduler will release the process lock.
 * When the sleeping process is resumed, it must release the process lock, previously locked by scheduler.
 * The resuming process must acquire the lk lock. Since it needs to consume the data without any interruption.
-
-### How unix pipes work?
-
-```c
-int
-pipewrite(struct pipe *pi, uint64 addr, int n)
-{
-  int I;
-  char ch;
-  struct proc *pr = myproc();
-
-  acquire(&pi->lock);
-  for(I = 0; I < n; I++){
-    while(pi->nwrite == pi->nread + PIPESIZE){  *//DOC: pipewrite-full*
-      if(pi->readopen == 0 || myproc()->killed){
-        release(&pi->lock);
-        return -1;
-      }
-      wakeup(&pi->nread);
-      sleep(&pi->nwrite, &pi->lock);
-    }
-    if(copyin(pr->pagetable, &ch, addr + I, 1) == -1)
-      break;
-    pi->data[pi->nwrite++ % PIPESIZE] = ch;
-  }
-  wakeup(&pi->nread);
-  release(&pi->lock);
-  return n;
-}
-
-int
-piperead(struct pipe *pi, uint64 addr, int n)
-{
-  int i;
-  struct proc *pr = myproc();
-  char ch;
-
-  acquire(&pi->lock);
-  while(pi->nread == pi->nwrite && pi->writeopen){  *//DOC: pipe-empty*
-    if(myproc()->killed){
-      release(&pi->lock);
-      return -1;
-    }
-    sleep(&pi->nread, &pi->lock); *//DOC: piperead-sleep*
-  }
-  for(I = 0; I < n; I++){  *//DOC: piperead-copy*
-    if(pi->nread == pi->nwrite)
-      break;
-    ch = pi->data[pi->nread++ % PIPESIZE];
-    if(copyout(pr->pagetable, addr + i, &ch, 1) == -1)
-      break;
-  }
-  wakeup(&pi->nwrite);  *//DOC: piperead-wakeup*
-  release(&pi->lock);
-  return i;
-}
-```
-
-* Pipe buffer wraps around. 
-* a full buffer `(nwrite == nread+PIPESIZE)`
-* an empty buffer`(nwrite == nread)`
-* `Pipewrite` wakes up reader if buffer is full, or written is down.
-* `Piperead` sleep if no more data. Or read data from pipe, copy out to address. Then wake up the write channel.
-* **A few open questions:**
-* In `piperead`, why we wake up write first, then release `pi->lock`?
-* Why `piperead` does not go back to sleep after reading? Why there is no loop for `piperead`? Or is there an outside loop?
-
-### How does wait\(\), exit\(\), kill\(\) work?
-
-`wait()` is waiting for a child process to exist, and return its pid. It checks for any process's parent is itself. If the process state is ZOMBIE, copy some data, do the clean up. If has children but not dead yet, the parent is going to sleep, inside the big for loop.
-
-`exit()` first close all open files. Acquire parent lock, and child itself’s lock. Give my children to the root init process. Wake up my parent. Make me as ZOMBIE state. Release parent lock. Jump into scheduler.
-
-`kill()` does very little. It just set killed flag to 1. If state is `SLEEPING`, change it to `RUNNABLE`. So the process is waken up. When the process entering or leaving kernel, the trap will find out it is killed, and call `exit()`. Since xv6 using loops for sleep, if the killed process is wakeup from sleeping, the while condition still not applied, so it is sleeping again. But this is a problem, since it requires a lot of places handling `killed == 1` correctly.
-
-Challenges 1. Implement signal in xv6 2. Implement semaphore in xv6 3. Research how real OS use explicit free list to find free proc structures, instead of searching in `allocproc` in linear-time.
 
 
 

@@ -71,7 +71,7 @@ prime 31
 
 Use pipe and fork to set up the pipeline. The first process feeds the numbers 2 through 35 into the pipeline. For each prime number, you will arrange to create one process that reads from its left neighbour over a pipe and writes to its right neighbour over another pipe.
 
-![](../.gitbook/assets/image%20%2841%29.png)
+![](../.gitbook/assets/image%20%2843%29.png)
 
 Loop from 2 to 35. Write them to pipe one by one. Read the first one from pipe buffer. Record as `Num`. Create a new pipe, write everything not dividable by `Num` \(Use mod\).
 

@@ -30,7 +30,7 @@ The unit of isolation in xv6 is a _process_.
 
 #### Layout of a user process
 
-![](../.gitbook/assets/image%20%2813%29.png)
+![](../.gitbook/assets/image%20%2814%29.png)
 
 #### Each process has its own separate page table.
 

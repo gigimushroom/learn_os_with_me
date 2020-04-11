@@ -36,6 +36,8 @@
 ## Scheduling
 
 * [XV6 CPU Scheduling](scheduling/xv6-cpu-scheduling.md)
+* [How unix pipes work?](scheduling/how-unix-pipes-work.md)
+* [How does wait\(\), exit\(\), kill\(\) work?](scheduling/how-does-wait-exit-kill-work.md)
 
 ## File System
 

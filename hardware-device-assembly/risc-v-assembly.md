@@ -100,7 +100,7 @@ So before we calling function, we set return address first.
 
 Let’s see spec first: 
 
-![](../.gitbook/assets/image%20%2836%29.png)
+![](../.gitbook/assets/image%20%2838%29.png)
 
 `jalr` saves return address to first param. This part we are clear. It then sets PC to rs1 + offset. So PC will continue from the new address. Now, let’s look at our ret instruction’s meaning
 
@@ -189,7 +189,7 @@ Process calls `yield` to give up CPU, and let CPU scheduler to run. It calls the
 
 The assembly for calling the big `swtch` is at `800020b6`:
 
-![](../.gitbook/assets/image%20%2828%29.png)
+![](../.gitbook/assets/image%20%2830%29.png)
 
 `switch` is at:
 
