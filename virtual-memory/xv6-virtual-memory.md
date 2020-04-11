@@ -6,7 +6,7 @@ paging provides a level of indirection for addressing CPU -&gt; MMU -&gt; RAM VA
 
 use index bits of VA to find a page table entry \(PTE\) construct physical address using PPN from PTE + offset of VA
 
-![](../.gitbook/assets/image.png)
+![](../.gitbook/assets/image%20%281%29.png)
 
 one page table per address space
 

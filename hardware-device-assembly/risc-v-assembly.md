@@ -100,7 +100,7 @@ So before we calling function, we set return address first.
 
 Let’s see spec first: 
 
-![](../.gitbook/assets/image%20%2826%29.png)
+![](../.gitbook/assets/image%20%2829%29.png)
 
 `jalr` saves return address to first param. This part we are clear. It then sets PC to rs1 + offset. So PC will continue from the new address. Now, let’s look at our ret instruction’s meaning
 
@@ -119,7 +119,7 @@ When your program is calling a function, it prepares the return address first be
 
 ## RISC-V calling convention
 
-![](../.gitbook/assets/image%20%286%29.png)
+![](../.gitbook/assets/image%20%288%29.png)
 
 ### How to design Virtual Memory Area?
 
@@ -189,7 +189,7 @@ Process calls `yield` to give up CPU, and let CPU scheduler to run. It calls the
 
 The assembly for calling the big `swtch` is at `800020b6`:
 
-![](../.gitbook/assets/image%20%2819%29.png)
+![](../.gitbook/assets/image%20%2822%29.png)
 
 `switch` is at:
 
@@ -226,7 +226,7 @@ After the jump, at this point, `ra` is set to PC + 4, which is `800020ba`.
 
 ### See GDB debug references
 
-![](../.gitbook/assets/image%20%287%29.png)
+![](../.gitbook/assets/image%20%289%29.png)
 
 `Stepi` shows the next instruction to execute.
 

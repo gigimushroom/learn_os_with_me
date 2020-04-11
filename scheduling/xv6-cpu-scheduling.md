@@ -10,7 +10,7 @@ This multiplexing creates an illusion that each process has its own CPU!
 
 ### How kernel does the context switch visualized?
 
-![](../.gitbook/assets/image%20%281%29.png)
+![](../.gitbook/assets/image%20%282%29.png)
 
 ### How to implement context switch?
 
