@@ -65,3 +65,8 @@
 * [Lab 10 Networking Part 1](labs/lab-10-networking-part-1.md)
 * [Lab 10 Networking Part 2](labs/lab-10-networking-part-2.md)
 
+## Hardware, Device, Assembly
+
+* [RISC-V assembly](hardware-device-assembly/risc-v-assembly.md)
+* [XV6 Device Driver](hardware-device-assembly/xv6-device-driver.md)
+

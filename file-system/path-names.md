@@ -93,7 +93,7 @@ skipelem(char *path, char *name)
 
 Find path “a/b/c". 3 iterations. 
 
-![Example of finding path](../.gitbook/assets/image%20%2823%29.png)
+![Example of finding path](../.gitbook/assets/image%20%2827%29.png)
 
 ### Races and deadlock
 

@@ -22,7 +22,7 @@ Call to f from main `26: 45b1 li a1,12` Call to g from f `14: 250d addiw a0,a0,3
 
 `0000000000000650 <printf>` 
 
-![](../.gitbook/assets/image%20%2815%29.png)
+![](../.gitbook/assets/image%20%2817%29.png)
 
 Or see the following code in main:
 
@@ -41,7 +41,7 @@ program counter\(pc\) is `0x30`.
 
 **What value is in the register ra just after the jalr to printf in main?**
 
-![](../.gitbook/assets/image%20%2812%29.png)
+![](../.gitbook/assets/image%20%2814%29.png)
 
 `pc+4` is written to register ra. In our example asm, ra stores 0x38
 
@@ -91,7 +91,7 @@ Syntax: `addi $t, $s, imm`
 
 store a double world. Store 64 bits from s0 register to sp+8
 
-![](../.gitbook/assets/image%20%2821%29.png)
+![](../.gitbook/assets/image%20%2824%29.png)
 
 ## 心得
 
