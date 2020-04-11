@@ -2,6 +2,18 @@
 
 * [Learn OS with me](README.md)
 
+## OS Interfaces
+
+* [OS interfaces](os-interfaces/os-interfaces.md)
+* [I/O and File descriptors](os-interfaces/i-o-and-file-descriptors.md)
+* [Process and Memory](os-interfaces/process-and-memory.md)
+* [Pipes](os-interfaces/pipes.md)
+* [File](os-interfaces/file.md)
+
+## OS Organization
+
+* [Untitled](os-organization/untitled.md)
+
 ## Memory Management <a id="virtual-memory"></a>
 
 ## Traps and Interrupts
@@ -36,14 +48,6 @@
 * [Lab 9 mmap](labs/untitled.md)
 * [Lab 10 Networking Part 1](labs/lab-10-networking-part-1.md)
 * [Lab 10 Networking Part 2](labs/lab-10-networking-part-2.md)
-
-## OS Interfaces
-
-* [OS interfaces](os-interfaces/os-interfaces.md)
-
-## OS Organization
-
-* [Untitled](os-organization/untitled.md)
 
 ## File System <a id="file-system-1"></a>
 
