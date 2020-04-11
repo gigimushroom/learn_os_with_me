@@ -31,6 +31,9 @@
 
 ## Traps and Interrupts
 
+* [Trap Home Page](traps-and-interrupts/trap-home-page.md)
+* [Untitled](traps-and-interrupts/untitled-2.md)
+* [Untitled](traps-and-interrupts/untitled-3.md)
 * [How system calls get into/out of the kernel](traps-and-interrupts/untitled.md)
 
 ## Scheduling
