@@ -1,5 +1,5 @@
 ---
-description: OS is the Super Power
+description: This is my journey of learning how to build an operating system.
 ---
 
 # Learn OS with me
@@ -9,21 +9,18 @@ description: OS is the Super Power
 Becoming a super hero is a fairly straight forward process:
 
 ```
-$ give me super-powers
+$ git clone https://github.com/gigimushroom/mushroom_os.git
 ```
 
 {% hint style="info" %}
- Super-powers are granted randomly so please submit an issue if you're not happy with yours.
+Follow [https://pdos.csail.mit.edu/6.828/2019/tools.html](https://pdos.csail.mit.edu/6.828/2019/tools.html) to build tool chains
 {% endhint %}
 
 Once you're strong enough, save the world:
 
-{% code title="hello.sh" %}
 ```bash
-# Ain't no code for that yet, sorry
-echo 'You got to trust me on this, I saved the world'
+make && make qemu
 ```
-{% endcode %}
 
 
 
