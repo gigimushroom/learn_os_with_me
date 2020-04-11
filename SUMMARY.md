@@ -24,6 +24,7 @@
   * [Part 2: Create an Address Space](virtual-memory/page-table/part-2-create-an-address-space.md)
   * [Part 3: How Page Table is used](virtual-memory/page-table/part-3-how-page-table-is-used.md)
   * [Part 4: Page Fault and Swap](virtual-memory/page-table/part-4-page-fault-and-swap.md)
+  * [Part 5: How to operate on page tables](virtual-memory/page-table/part-5-how-to-operate-on-page-tables.md)
 * [xv6 buddy allocator](virtual-memory/untitled-1/README.md)
   * [How to display physical memory](virtual-memory/untitled-1/how-to-display-physical-memory.md)
 * [Memory Management Walk Through](virtual-memory/untitled.md)

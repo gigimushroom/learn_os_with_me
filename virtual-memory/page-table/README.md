@@ -8,5 +8,7 @@
 
 {% page-ref page="part-4-page-fault-and-swap.md" %}
 
+{% page-ref page="part-5-how-to-operate-on-page-tables.md" %}
+
 
 
