@@ -8,7 +8,7 @@ description: Increase the maximum size of an xv6 file.
 
 Currently xv6 files are limited to 268 blocks, or 268\*BSIZE bytes \(BSIZE is 1024 in xv6\). This limit comes from the fact that an xv6 inode contains 12 “direct” block numbers and one “singly-indirect” block number, which refers to a block that holds up to 256 more block numbers, for a total of 12+256=268 blocks.
 
-![](../.gitbook/assets/image%20%288%29.png)
+![](../.gitbook/assets/image%20%289%29.png)
 
 ## Your Task
 
@@ -22,7 +22,7 @@ Modify `bmap()` so that it implements a doubly-indirect block, in addition to di
 
 ## Solution
 
-![](../.gitbook/assets/image%20%285%29.png)
+![](../.gitbook/assets/image%20%286%29.png)
 
 ### Preliminaries
 

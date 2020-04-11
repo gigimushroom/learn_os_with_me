@@ -4,8 +4,6 @@
 
 ## Memory Management <a id="virtual-memory"></a>
 
-* [XV6 File System](virtual-memory/fs.md)
-
 ## Traps and Interrupts
 
 * [How system calls get into/out of the kernel](traps-and-interrupts/untitled.md)
@@ -38,4 +36,16 @@
 * [Lab 9 mmap](labs/untitled.md)
 * [Lab 10 Networking Part 1](labs/lab-10-networking-part-1.md)
 * [Lab 10 Networking Part 2](labs/lab-10-networking-part-2.md)
+
+## OS Interfaces
+
+* [OS interfaces](os-interfaces/os-interfaces.md)
+
+## OS Organization
+
+* [Untitled](os-organization/untitled.md)
+
+## File System <a id="file-system-1"></a>
+
+* [Untitled](file-system-1/untitled.md)
 
