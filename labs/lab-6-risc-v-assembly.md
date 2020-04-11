@@ -91,7 +91,7 @@ Syntax: `addi $t, $s, imm`
 
 store a double world. Store 64 bits from s0 register to sp+8
 
-![](../.gitbook/assets/image%20%2833%29.png)
+![](../.gitbook/assets/image%20%2834%29.png)
 
 ## 心得
 

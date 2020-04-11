@@ -10,7 +10,7 @@ Paging provides a level of indirection for addressing
 
 use index bits of VA to find a page table entry \(PTE\) construct physical address using PPN from PTE + offset of VA.
 
-![](../.gitbook/assets/image%20%2838%29.png)
+![](../.gitbook/assets/image%20%2840%29.png)
 
 one page table per address space
 

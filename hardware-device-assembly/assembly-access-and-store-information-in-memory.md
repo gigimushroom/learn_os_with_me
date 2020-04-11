@@ -14,7 +14,7 @@ The memory of address `Addr` could come from user space, CPU and MLU works toget
 
 ### RISC-V Integer Instructions
 
-![](../.gitbook/assets/image%20%2831%29.png)
+![](../.gitbook/assets/image%20%2832%29.png)
 
 The operand forms is basically the same. `lb D, S` `sb S, D`
 

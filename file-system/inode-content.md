@@ -2,7 +2,7 @@
 
 So far, we have been talking about how to allocate an inode, how to release an inode, how to get an inode, and locks around inode. In this section, we will look closely at the inode **data**.
 
-![](../.gitbook/assets/image%20%2829%29.png)
+![](../.gitbook/assets/image%20%2830%29.png)
 
 ### Find data block address in inode
 
