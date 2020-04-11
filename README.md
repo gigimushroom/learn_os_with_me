@@ -1,3 +1,7 @@
+---
+description: OS is the Super Power
+---
+
 # Learn OS with me
 
 ## Getting Super Powers
