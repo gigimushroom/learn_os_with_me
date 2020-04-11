@@ -2,7 +2,7 @@
 
 ## Using lock in XV6
 
-![](../.gitbook/assets/image%20%2842%29.png)
+![](../.gitbook/assets/image%20%2844%29.png)
 
 Must have a global deadlock-avoiding lock order if holding multiple locks together.
 

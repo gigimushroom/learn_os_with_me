@@ -4,7 +4,7 @@ description: 7 layers of file system
 
 # Overview and Disk Layout
 
-![](../.gitbook/assets/image%20%2813%29.png)
+![](../.gitbook/assets/image%20%2814%29.png)
 
 ## Disk Layout 
 

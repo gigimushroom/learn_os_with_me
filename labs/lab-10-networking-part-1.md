@@ -125,7 +125,7 @@ e1000_init((uint32*)e1000_regs);
 
 ### How Transmit work in hardware?
 
-![](../.gitbook/assets/image%20%2844%29.png)
+![](../.gitbook/assets/image%20%2846%29.png)
 
 `[Head, Tail)` contains all the packets that are about to sent to outside by the hardware \(E1000\).
 

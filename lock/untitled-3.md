@@ -95,7 +95,7 @@ What this function does is: Convert hex value to a proper int. Use negative of v
 
 The flow of 2 cases: 
 
-![](../.gitbook/assets/image%20%2832%29.png)
+![](../.gitbook/assets/image%20%2834%29.png)
 
 Case 1: If no one waiting, return T. 
 

@@ -26,5 +26,5 @@ The shell is an ordinary program that reads commands from the user and executes 
 
 #### Xv6 system calls
 
-![](../.gitbook/assets/image%20%2829%29.png)
+![](../.gitbook/assets/image%20%2831%29.png)
 

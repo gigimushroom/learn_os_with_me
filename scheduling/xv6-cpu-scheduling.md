@@ -183,7 +183,7 @@ The return value of myproc is safe to use even if interrupts are enabled: if a t
 
 ### Graph
 
-![](../.gitbook/assets/image%20%2811%29.png)
+![](../.gitbook/assets/image%20%2812%29.png)
 
 ## How process intentionally interact with each other?
 

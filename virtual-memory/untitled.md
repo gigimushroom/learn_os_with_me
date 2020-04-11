@@ -84,7 +84,7 @@ TODO: use other notes
 
 ### How stack look after pushing args?
 
-![](../.gitbook/assets/image%20%2827%29.png)
+![](../.gitbook/assets/image%20%2829%29.png)
 
 ### Find PA from VA
 
