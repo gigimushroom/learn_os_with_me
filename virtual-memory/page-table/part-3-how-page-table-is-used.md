@@ -15,7 +15,7 @@ How do we make sure process page tables and kernel’s page table not pointing t
 
 ### Solution:
 
-![](../../.gitbook/assets/image%20%2825%29.png)
+![](../../.gitbook/assets/image%20%2828%29.png)
 
 * Each process, and kernel all have its own Page Table.
 * Switching between user process or to/from kernel needs to set satp register to the address of the root page-table page.

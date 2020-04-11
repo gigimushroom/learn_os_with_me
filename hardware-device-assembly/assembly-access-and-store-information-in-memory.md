@@ -2,7 +2,7 @@
 
 ### Sizes of C data types in X86-64
 
-![](../.gitbook/assets/image%20%2817%29.png)
+![](../.gitbook/assets/image%20%2818%29.png)
 
 ### Operand forms in X86-64
 
@@ -14,7 +14,7 @@ The memory of address `Addr` could come from user space, CPU and MLU works toget
 
 ### RISC-V Integer Instructions
 
-![](../.gitbook/assets/image%20%2834%29.png)
+![](../.gitbook/assets/image%20%2837%29.png)
 
 The operand forms is basically the same. `lb D, S` `sb S, D`
 

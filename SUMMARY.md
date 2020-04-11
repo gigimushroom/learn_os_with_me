@@ -32,9 +32,12 @@
 ## Traps and Interrupts
 
 * [Trap Home Page](traps-and-interrupts/trap-home-page.md)
-* [Untitled](traps-and-interrupts/untitled-2.md)
-* [Untitled](traps-and-interrupts/untitled-3.md)
+* [What is trapframe](traps-and-interrupts/untitled-2.md)
+* [What is trampoline](traps-and-interrupts/untitled-3.md)
+* [Traps from kernel space](traps-and-interrupts/traps-from-kernel-space.md)
+* [How fork\(\) works](traps-and-interrupts/how-fork-works.md)
 * [How system calls get into/out of the kernel](traps-and-interrupts/untitled.md)
+* [How exec\(\) works](traps-and-interrupts/how-exec-works.md)
 
 ## Scheduling
 
