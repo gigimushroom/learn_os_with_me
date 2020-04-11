@@ -29,6 +29,15 @@
 
 ## File System
 
+* [Overview and Disk Layout](file-system/overview-and-disk-layout.md)
+* [Buffer Cache](file-system/buffer-cache.md)
+* [Design Inode Layer](file-system/design-inode-layer.md)
+* [Block Allocator](file-system/block-allocator.md)
+* [Design a log system for crash recovery](file-system/design-a-log-system-for-crash-recovery.md)
+* [Untitled](file-system/untitled-2.md)
+* [Untitled](file-system/untitled.md)
+* [Make Xv6 File disk management system](file-system/make-xv6-file-disk-management-system.md)
+
 ## Lock
 
 * [Spinlock](lock/untitled.md)
@@ -49,8 +58,4 @@
 * [Lab 9 mmap](labs/untitled.md)
 * [Lab 10 Networking Part 1](labs/lab-10-networking-part-1.md)
 * [Lab 10 Networking Part 2](labs/lab-10-networking-part-2.md)
-
-## File System <a id="file-system-1"></a>
-
-* [Untitled](file-system-1/untitled.md)
 
