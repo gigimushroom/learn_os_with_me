@@ -20,7 +20,7 @@ RISC-V hardware doesn’t switch page tables during a trap, we need the user pag
 
 In this way, after switching page table root in `satp` register, virtual memory is still the same, so it can continue to execute.
 
-{% page-ref page="trap-home-page.md" %}
+{% page-ref page="trap-home-page/" %}
 
 
 

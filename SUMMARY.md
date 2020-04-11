@@ -31,7 +31,8 @@
 
 ## Traps and Interrupts
 
-* [Trap Home Page](traps-and-interrupts/trap-home-page.md)
+* [Trap Home Page](traps-and-interrupts/trap-home-page/README.md)
+  * [系统调用的核心原理](traps-and-interrupts/trap-home-page/xi-tong-tiao-yong-de-he-xin-yuan-li.md)
 * [What is trapframe](traps-and-interrupts/untitled-2.md)
 * [What is trampoline](traps-and-interrupts/untitled-3.md)
 * [Traps from kernel space](traps-and-interrupts/traps-from-kernel-space.md)
