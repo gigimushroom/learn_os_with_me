@@ -54,9 +54,13 @@
 * [Write FS simulator in python](file-system/write-fs-simulator-in-python.md)
 * [How Redirect Shell command works](file-system/how-redirect-shell-command-works.md)
 
-## Lock
+## Concurrency <a id="lock"></a>
 
 * [Spinlock](lock/untitled.md)
+* [How linux select work](lock/how-linux-select-work.md)
+* [Untitled](lock/untitled-3.md)
+* [Untitled](lock/untitled-2.md)
+* [Untitled](lock/untitled-1.md)
 
 ## Labs
 
