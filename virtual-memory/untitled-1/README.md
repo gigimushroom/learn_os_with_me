@@ -10,7 +10,7 @@
 
    **4. 释放速度更快**
 
-### _Buddy allocation initialization_
+### Buddy allocation initialization
 
 ```text
 === buddy allocator state ===
@@ -24,7 +24,21 @@ size 2 (64): free list:  0x109756000
   split: 0
 ```
 
-NSIZES is number of entries in sizes array. Here is 3. MAXSIZE is NSIZES - 1. Largest index in sizes array. Here is 2. Number of Block at size k: 2 ^ \(MAXSIZE - k\). Here: k=0, NBLK=2^2=4 k=1, NBLK=2^\(2-1\)-2. k=2, NBLK= 2^0=1 Note: In this way, the last size item is guaranteed to have 1 block.
+NSIZES is number of entries in sizes array. Here is 3. 
+
+MAXSIZE is NSIZES - 1. Largest index in sizes array. Here is 2. 
+
+Number of Block at size k: 2 ^ \(MAXSIZE - k\). 
+
+Here: 
+
+`k=0, NBLK=2^2=4` 
+
+`k=1, NBLK=2^(2-1)-2.` 
+
+`k=2, NBLK= 2^0=1` 
+
+Note: In this way, the last size item is guaranteed to have 1 block.
 
 ```c
 struct sz_info {
@@ -36,11 +50,27 @@ typedef struct sz_info Sz_info;
 static Sz_info bd_sizes[NSIZES];
 ```
 
-bd\_sizes is the buddy allocator array. Each item is sz\_info. sz\_info contains a free list, an array alloc, and a split array. In bd\_init\(\): 1. Call mmap to allocate a heap size of memory. Save ptr to bd\_base. 2. For \[0, NSIZES\) A\) initialize every free list B\) allocate alloc array with correct size. \(Use `1 << (MAXSIZE-k)` to find number of block\) C\) memset to 0 since malloc does not clear bit. 3. For \[1, NSIZES\) A\) allocate split array with correct size. \(Use `1 << (MAXSIZE-k)` to find number of block\) C\) memset to 0 since malloc does not clear bit. 4. Push the bd\_base\(allocated from mmap\) to the `bd_sizes[MAXSIZE].free`. So the available free list is shown in biggest size group. 5. End of initialization.
+`bd_sizes` is the buddy allocator array. Each item is `sz_info`. 
 
-In xv6 unix, the imp is slightly different. We get memory range \(Start, end\) from kernel. We mark the meta as allocated, mark the unreachable one as allocated \(HEAPSIZE - end\). Then for remaining free memory \(P to end\), we try to divide them into each size k free list, instead of putting all into the MAXSIZE free list.
+`sz_info` contains a free list, an array alloc, and a split array. 
 
-### _Allocation_
+In `bd_init()`: 
+
+1. Call mmap to allocate a heap size of memory. Save ptr to `bd_base`. 
+2. For \[0, NSIZES\), initialize every free list. Allocate alloc array with correct size. \(Use`1 << (MAXSIZE-k)` to find number of block\). Finally, `memset` to 0 since malloc does not clear bit. 
+3. For \[1, NSIZES\), allocate split array with correct size \(Use `1 << (MAXSIZE-k)` to find number of block\). Then, `memset` to 0 since malloc does not clear bit. 
+4. Push the bd\_base\(allocated from mmap\) to the `bd_sizes[MAXSIZE].free`. So the available free list is shown in biggest size group. 
+5. End of initialization.
+
+In xv6 unix, the implementation is slightly different. 
+
+We get memory range \(Start, end\) from kernel. 
+
+We mark the meta as allocated, mark the unreachable one as allocated \(`HEAPSIZE - end`\). 
+
+Then for remaining free memory \(P to end\), we try to divide them into each size k free list, instead of putting all into the `MAXSIZE` free list.
+
+### Allocation
 
 What happen when calling `bd_malloc(8)`
 
@@ -73,51 +103,83 @@ size 2 (64): free list:
 
 7. Return p, which is the ptr points to allocated item. It should be in the fk row.
 
-> The key idea is once we found a matching block item, we split it to half. The first half is allocated \(think of moving this half to lower size\), and will be return to caller. The 2nd half is added to lower level's free list. Use a loop to keep split until reaching end\(smallest needed size\). In above example, after splits, size 2 has no free list. Size 1 has old size 2's 2nd half.
->
-> ### Size 0 free list has ‘old size 2’s 1st half’s 2nd half’. The very 1st piece is allocated and returns to caller!
->
-> There are a few of helpers worth learning:
->
-> ```c
-> // find first k such that 2^k >= n
-> int firstk(size_t n) {
->   int k = 0;
->   size_t size = LEAF_SIZE;
->   while (size < n) {
->     k++;
->     size *= 2;
->   }
->   return k;
-> }
-> ```
->
-> \`\`\`c // Compute the block index for address p at size k int blk\_index\(int k, char _p\) { int n = p - \(char_ \) bd\_base; return n / BLK\_SIZE\(k\); }
+The key idea is once we found a matching block item, we split it to half. The first half is allocated \(think of moving this half to lower size\), and will be return to caller. The 2nd half is added to lower level's free list. Use a loop to keep split until reaching end\(smallest needed size\). 
 
-// Convert a block index at size k back into an address void _addr\(int k, int bi\) { int n = bi_  BLK\_SIZE\(k\); return \(char \*\) bd\_base + n; }
+In above example, after splits, size 2 has no free list. Size 1 has old size 2's 2nd half. 
 
-```text
-*The entire memory is reflected in each block size array.*
+Size 0 free list has ‘old size 2’s 1st half’s 2nd half’. The very 1st piece is allocated and returns to caller!
+
+#### There are a few of helpers worth learning:
+
+```c
+// find first k such that 2^k >= n
+int firstk(size_t n) {
+  int k = 0;
+  size_t size = LEAF_SIZE;
+  while (size < n) {
+    k++;
+    size *= 2;
+  }
+  return k;
+}
+```
+
+```c
+// Compute the block index for address p at size k
+int
+blk_index(int k, char *p) {
+  int n = p - (char *) bd_base;
+  return n / BLK_SIZE(k);
+}
+
+// Convert a block index at size k back into an address
+void *addr(int k, int bi) {
+  int n = bi * BLK_SIZE(k);
+  return (char *) bd_base + n;
+}
+```
+
+### The entire memory is reflected in each block size array. __😍 
+
 ```c
 Size 0: |16|16|16|16|16|16|16|16|
 Size 1: |32   |32   |32   |32   |
 Size 2: |64                     |
 ```
 
-But the actual ownership of each small piece of content only belongs to one size array, indicated by alloc bit, split bit. In this way, given size k, and address, we can find block index. Given block index, and size k, we can find address.
+But the actual ownership of each small piece of content only belongs to one size array, indicated by alloc bit, split bit.
 
-### The free list also operates on this big chunk of memory, but it is using double linked list.
+In this way, given size k, and address, we can find block index.
+
+Given block index, and size k, we can find address.
+
+The free list also operates on this big chunk of memory, but it is using double linked list.
 
 ### Memory Free
 
-`bd_free(void *p)` 1. Find the size of block that p points to. If the block index of p is set in \(k + 1\)'s split bit array, it means the parent was split because of me, thus, k is the matching block. 2. Loop matching block, while k &lt; MAXSIZE 1. Find block index of p in current block k. 2. Clear alloc bit. We got a free block! 3. Find my buddy. 4. If my buddy is still allocated, loop breaks. 5. If not, continue. 6. Find address of my buddy. 7. Remove buddy from current free list. We are going to merge! 8. Find who is leader between me and buddy. Reset p if buddy is leader. 9. Find block index of p in k + 1. Clear our parent \(k + 1\)’s split bit array. 10. Current iteration ends.
+`bd_free(void *p)` 
 
-1. Push the pointer p to current k’s free list.
+1. Find the size of block that p points to. If the block index of p is set in \(k + 1\)'s split bit array, it means the parent was split because of me, thus, k is the matching block.
+2. Loop matching block, while k &lt; MAXSIZE
+   1. Find block index of p in current block k.
+   2. Clear alloc bit. We got a free block!
+   3. Find my buddy.
+   4. If my buddy is still allocated, loop breaks.
+   5. If not, continue.
+   6. Find address of my buddy.
+   7. Remove buddy from current free list. We are going to merge!
+   8. Find who is leader between me and buddy. Reset p if buddy is leader.
+   9. Find block index of p in k + 1. Clear our parent \(k + 1\)’s split bit array.
+   10. Current iteration ends.
+3. Push the pointer p to current k’s free list.
 
-Note:
+{% hint style="info" %}
+The loop will only end either p’s buddy is still allocated or reach MAXSIZE. 
 
-* The loop will only end either p’s buddy is still allocated or reach MAXSIZE. So the above step 3 is either pushing the single freed p to free list, or push the merged \(p+buddy\) to free list.
-* Largest size block array’s alloc bit is always set.
+So the above step 3 is either pushing the single freed p to free list, or push the merged \(p+buddy\) to free list.
+
+Largest size block array’s alloc bit is always set.
+{% endhint %}
 
 ### Optimization
 
@@ -138,9 +200,17 @@ void *addr_malloc(int k, int bi) {
 }
 ```
 
-In bd\_malloc, Find bit index of p, flips the bit. Case 1: If current bit is 0, means both are free. By changing result to 1. So we have 1 free, 1 allocated. Case 2: If current xor bit is 1, means the other buddy is allocated, we are allocated the 2nd, so both of them will be allocated, we got 1 xor 1 which is 0.
+In bd\_malloc, Find bit index of p, flips the bit. 
 
-In bd\_free, If current bit is 0, it means both buddy and p are allocated. Loop needs to break, but flip the bit before the break. If current bit is 1, it means we are the allocated one, my buddy is free, flipt the bit\(set to 0\), indicating all free, continue the merge process.
+Case 1: If current bit is 0, means both are free. By changing result to 1. So we have 1 free, 1 allocated. 
+
+Case 2: If current xor bit is 1, means the other buddy is allocated, we are allocated the 2nd, so both of them will be allocated, we got 1 xor 1 which is 0.
+
+In bd\_free, 
+
+If current bit is 0, it means both buddy and p are allocated. Loop needs to break, but flip the bit before the break. 
+
+If current bit is 1, it means we are the allocated one, my buddy is free, flip the bit\(set to 0\), indicating all free, continue the merge process.
 
 ```c
 // allocating memory for alloc array for each block size
@@ -152,7 +222,11 @@ We want to allocate half of the size, so we want to change above to: `int sz = s
 
 Let’s give above a try!!!! It works as a proof of concept.
 
-_There are some difference between simple buddy allocation implementation and the xv6 buddy impl._ In simple one, during initialization, the whole free memory is set in max\_size \(last row\) as free list. First allocation will split from the highest size, all the way to the desired size. _In xv6 one, it tries to initialize the free lists for each size k!_
+_There are some difference between simple buddy allocation implementation and the xv6 buddy impl._ 
+
+In simple one, during initialization, the whole free memory is set in max\_size \(last row\) as free list. First allocation will split from the highest size, all the way to the desired size. 
+
+_In xv6 one, it tries to initialize the free lists for each size k!_
 
 ```c
 /// If a block is marked as allocated and the buddy is free, put the/
@@ -196,7 +270,13 @@ bd_initfree(void *bd_left, void *bd_right) {
   return free;
 ```
 
-It find 2 pairs: 1. Next block containing p and its buddy. 2. Current block containing bd\_end and its buddy. For each pair, if either of them is allocated, move the free one to size k's free list if that free block is within free range.
+It find 2 pairs: 
+
+1. Next block containing p and its buddy. 
+
+2. Current block containing bd\_end and its buddy. 
+
+For each pair, if either of them is allocated, move the free one to size k's free list if that free block is within free range.
 
 **The thing surprised me is if we add up all the size of pushed-to-free-list blocks, the total is exactly the available size \(bd\_end - p\)!** **This mechanisms significantly reduced the first multiple split!**
 
@@ -260,7 +340,9 @@ The key idea is:
 
 **How we determine which one from pair is free?** _Check whether it is within range\(p, bd\_end\)!_
 
-From the sample above, the meta data size was 9, round up to LEAF\_SIZE \(16 bytes\), and free memory range starts from there. In above case, size 0 got 16, size 2 got 32, 64, 128. Total is 240.
+From the sample above, the meta data size was 9, round up to LEAF\_SIZE \(16 bytes\), and free memory range starts from there. 
+
+In above case, size 0 got 16, size 2 got 32, 64, 128. Total is 240.
 
 ### Summary
 
