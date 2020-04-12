@@ -66,9 +66,11 @@ The allocator sometimes treats addresses as integers in order to perform arithme
 
 ## Process Address Space
 
-TODO: use other notes
+TODO
 
 ## How `exec` works
+
+{% page-ref page="../traps-and-interrupts/how-exec-works.md" %}
 
 1. Find `inode` by path
 2. Check ELF header

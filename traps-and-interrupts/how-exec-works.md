@@ -4,9 +4,31 @@ description: Split the flow into 2 phases.
 
 # How exec\(\) works
 
-## How exec\(\) works
+### Overview
 
-Split the flow into 4 phases: 1. Read args. 2. Load program from disk to memory. 3. Allocate stacks. 4. Prepare the new images.
+Split the flow into 4 phases: 
+
+1. Read args. 
+
+2. Load program from disk to memory. 
+
+3. Allocate stacks. 
+
+4. Prepare the new images.
+
+### Flow
+
+1. Find `inode` by path
+2. Check ELF header
+3. Load program by memory. `uvmalloc` to allocate new size.
+4. `loadseg` load file to memory address at `ph.vaddr`. Note: Exec loads bytes from the ELF file into memory at addresses specified by the ELF file.
+5. Allocate 2 pages. 2nd one is user stack.
+6. Push args to stack. Prepare `ustack` to save each argument with its address.
+7. Push the array of argv\[\] pointers \(`ustack`\) to stack.
+8. Set `sp` to `a1`.
+9. Commit to user image. Free old process’ page table.
+10. Set `epc`, `sp`, `sz`.
+11. `return argc` which set `argc` in reg `a0`. Now we have `main(args, args)` from `entry, a0, a1`
 
 ### Read User Args
 
@@ -54,9 +76,7 @@ Each pointer in RISC-V is 64 bits.
 
 `fetchstr(uarg, argv[i], PGSIZE)` is to load the string in `argv[I]`.
 
-#### Helper
-
-Helpers
+#### Fetch address and string
 
 ```c
 // Fetch the uint64 at addr from the current process.
@@ -104,11 +124,21 @@ Push argument strings to stack. Prepare rest of stack.
 
 Push the array of `argv[]` pointers to stack.
 
-Set `argv` in a1 register. Set process info, including `pagetable`, `sz` Set `epc = elf.entry`, initial program counter to main initial stack pointer. return `argc`, in RSIC-V, this sets `argc` in register a0. So arguments `main(argc, argv)` is set.
+Set `argv` in `a1` register. 
+
+Set process info, including `pagetable`, `sz` 
+
+Set `epc = elf.entry`, initial program counter to main initial stack pointer. 
+
+Return `argc`, in RSIC-V, this sets `argc` in register `a0`. So arguments `main(argc, argv)` is set.
 
 The jump preparation is done. Program will go to `main`, and get args set properly.
 
-#### Core `exec` code for reference
+### How stack look after pushing args?
+
+![](../.gitbook/assets/image%20%2830%29.png)
+
+### Core `exec` code for reference
 
 ```c
 int
@@ -213,7 +243,7 @@ exec(char *path, char **argv)
   p->sz = sz;
 ```
 
-#### TODO
+### TODO
 
 understand ELF.
 
