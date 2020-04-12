@@ -1,8 +1,12 @@
 # Challenge yourself
 
-Challenge yourself In `proc.c`, there is an array `initcode[]` of binary code. What is its relationship with `initcode.S`?
+## Problem
 
-### Answer
+In `proc.c`, there is an array `initcode[]` of binary code. What is its relationship with `initcode.S`?
+
+## Solution
+
+### Research
 
 Testing code: `-xc` to make the hex dump more readable. Example:
 
@@ -13,9 +17,7 @@ $ od -xc test.txt
 0000006
 ```
 
-### FUN FUN ARGS
-
-The Command
+The `od` Command
 
 ![](../.gitbook/assets/image%20%2839%29.png)
 
@@ -27,17 +29,33 @@ The Command
 
 Note: Each **Hexadecimal** character represents 4 bits \(0 - 15 decimal\). A byte is 2 hex.
 
-#### Investigation Result
+### Answer
 
-Thus, we want a memory dump of instructions in hex format, and separated by each char. We have to load `initcode`, and use it to call system call `exec` to run `init`. We cannot directly load `init` binary as hex dump, otherwise we have to do something similar to what `exec` does, set up C stacks, parse ELF headers, etc. So the simply way is: 1. use `objcopy` to copy a stripped instruction only data file. 2. Use `od` to print the data file in hex, separated by byte \(char\). 3. Append `0x` to each char. 4. That is the result if `initcode` array you see in `proc.c`.
+We want a memory dump of instructions in hex format, and separated by each char. 
 
-**References:**
+We have to load `initcode`, and use it to call system call `exec` to run `init`. We cannot directly load `init` binary as hex dump, otherwise we have to do something similar to what `exec` does, set up C stacks, parse ELF headers, etc. 
 
-`od` - dump files in various formats. See [od](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/od.html) [The UNIX School: 3 different ways of dumping hex contents of a file](http://www.theunixschool.com/2011/06/3-different-ways-of-dumping-hex.html)
+So the simply solution is: 
 
-### Challenge!
+1. use `objcopy` to copy a stripped instruction only data file. 
 
-Switch the hex dump of `initcode` to a program you wrote!
+2. Use `od` to print the data file in hex, separated by byte \(char\). 
+
+3. Append `0x` to each char. 
+
+4. That is the result if `initcode` array you see in `proc.c`.
+
+
+
+**References**
+
+`od` - dump files in various formats. 
+
+See [od](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/od.html) [The UNIX School: 3 different ways of dumping hex contents of a file](http://www.theunixschool.com/2011/06/3-different-ways-of-dumping-hex.html)
+
+## Challenge!
+
+Try to switch the hex dump of `initcode` to a program you wrote!
 
 I modify `initcode.S` to use `echo`:
 
