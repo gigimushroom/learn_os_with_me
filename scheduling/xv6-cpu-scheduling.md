@@ -12,7 +12,7 @@ This multiplexing creates an illusion that each process has its own CPU!
 
 ## How kernel does the context switch visualized?
 
-![](../.gitbook/assets/image%20%282%29.png)
+![](../.gitbook/assets/image%20%283%29.png)
 
 ## How to implement context switch?
 
@@ -183,7 +183,7 @@ The return value of myproc is safe to use even if interrupts are enabled: if a t
 
 ### Graph
 
-![](../.gitbook/assets/image%20%2812%29.png)
+![](../.gitbook/assets/image%20%2813%29.png)
 
 ## How process intentionally interact with each other?
 

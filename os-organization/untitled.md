@@ -26,11 +26,11 @@ Kernel control the entry point for transitions to supervisor mode for security r
 
 The unit of isolation in xv6 is a _process_. 
 
-![](../.gitbook/assets/image%20%286%29.png)
+![](../.gitbook/assets/image%20%287%29.png)
 
 #### Layout of a user process
 
-![](../.gitbook/assets/image%20%2815%29.png)
+![](../.gitbook/assets/image%20%2816%29.png)
 
 #### Each process has its own separate page table.
 

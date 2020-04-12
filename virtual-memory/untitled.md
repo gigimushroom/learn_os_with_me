@@ -48,7 +48,7 @@ procinit(void)
 
 Diagram of kernel stack address space
 
-![](../.gitbook/assets/image%20%283%29.png)
+![](../.gitbook/assets/image%20%284%29.png)
 
 Stack grows downwards.
 
@@ -84,7 +84,7 @@ TODO: use other notes
 
 ### How stack look after pushing args?
 
-![](../.gitbook/assets/image%20%2829%29.png)
+![](../.gitbook/assets/image%20%2830%29.png)
 
 ### Find PA from VA
 

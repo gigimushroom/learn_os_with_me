@@ -2,11 +2,11 @@
 
 ### Sizes of C data types in X86-64
 
-![](../.gitbook/assets/image%20%2819%29.png)
+![](../.gitbook/assets/image%20%2820%29.png)
 
 ### Operand forms in X86-64
 
-![](../.gitbook/assets/image%20%2813%29.png)
+![](../.gitbook/assets/image%20%2814%29.png)
 
 `M[Addr]` means a reference to the value stored in memory starting at address `Addr`.
 
@@ -14,7 +14,7 @@ The memory of address `Addr` could come from user space, CPU and MLU works toget
 
 ### RISC-V Integer Instructions
 
-![](../.gitbook/assets/image%20%2839%29.png)
+![](../.gitbook/assets/image%20%2840%29.png)
 
 The operand forms is basically the same. `lb D, S` `sb S, D`
 

@@ -46,7 +46,7 @@ sys_exec(void)
 
 The `argv` is a pointer to list of arguments from user space. 
 
-![](../.gitbook/assets/image%20%289%29.png)
+![](../.gitbook/assets/image%20%2810%29.png)
 
 Each pointer in RISC-V is 64 bits.
 
@@ -94,7 +94,7 @@ fetchstr(uint64 addr, char *buf, int max)
 2. Load program into memory
 3. Allocate 2 pages, one for user stack. Another for guard page.
 
-![](../.gitbook/assets/image%20%2826%29.png)
+![](../.gitbook/assets/image%20%2827%29.png)
 
 Note: this graph has a bug. The following 3 items should not exist: `argv, argc, 0xFFFFFF`
 

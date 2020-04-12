@@ -25,7 +25,7 @@ if(fork() == 0) {
 
 **In more details**
 
-\[image:90B44339-AA3F-456A-81DF-092A324BFCFE-587-0001B03AC718093D/Screen Shot 2020-03-13 at 11.06.45 AM.png\]
+![](../.gitbook/assets/image%20%281%29.png)
 
 close\(0\) closes the fd 0. Make it available for next request. `dup` makes fd 0 pointing pipe read side. `fd` is just an index within process, points to a file opened by process. `fd` could be changed to point to different file. Any program wants to read from fd 0 \(standard input\) now read from pipe read side.
 

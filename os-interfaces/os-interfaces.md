@@ -12,7 +12,7 @@ OS defines interfaces to be simple and narrow. Combine programs to provide much 
 
 #### User space and Kernel Space
 
-![](../.gitbook/assets/image%20%284%29.png)
+![](../.gitbook/assets/image%20%285%29.png)
 
 When a process needs to invoke a kernel service, it invokes a system call. The system call enters the kernel, the kernel performs the service and returns.
 
@@ -26,5 +26,5 @@ The shell is an ordinary program that reads commands from the user and executes 
 
 #### Xv6 system calls
 
-![](../.gitbook/assets/image%20%2831%29.png)
+![](../.gitbook/assets/image%20%2832%29.png)
 
