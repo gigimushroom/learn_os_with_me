@@ -86,7 +86,9 @@ $U/initcode: $U/initcode.S
 
 In Makefile: `$(LD) $(LDFLAGS) -N -e start -Ttext 0 -o $U/initcode.out $U/initcode.o`
 
-[ld\(1\): GNU linker - Linux man page](https://linux.die.net/man/1/ld) ld -o  /lib/crt0.o hello.o -lc This tells `ld` to produce a file called _output_ as the result of linking the file “/lib/crt0.o” with “hello.o” and the library “libc.a”, which will come from the standard search directories. \(See the discussion of the **-l** option below.\)
+[ld\(1\): GNU linker - Linux man page](https://linux.die.net/man/1/ld) 
+
+`ld -o  /lib/crt0.o hello.o -lc` This tells `ld` to produce a file called _output_ as the result of linking the file “/lib/crt0.o” with “hello.o” and the library “libc.a”, which will come from the standard search directories. \(See the discussion of the **-l** option below.\)
 
 The linker cmd generates `initcode.out` from object file. The output file is:
 
@@ -103,7 +105,7 @@ In Makefile: `$(OBJCOPY) -S -O binary $U/initcode.out $U/initcode`
 
 [objcopy \(GNU Binary Utilities\)](https://sourceware.org/binutils/docs/binutils/objcopy.html) `objcopy` can be used to generate a raw binary file by using an output target of ‘binary’ \(e.g., use -O binary\).
 
-When `objcopy` generates a raw binary file, it will essentially **::produce a memory dump of the contents of the input object file::**. All symbols and relocation information will be discarded. The memory dump will start at the load address of the lowest section copied into the output file.
+When `objcopy` generates a raw binary file, it will essentially **produce a memory dump of the contents of the input object file**. All symbols and relocation information will be discarded. The memory dump will start at the load address of the lowest section copied into the output file.
 
 Use **-S** to remove sections containing debugging information.
 

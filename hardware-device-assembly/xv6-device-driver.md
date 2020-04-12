@@ -1,7 +1,5 @@
 # XV6 Device Driver
 
-## system/kernel/hardware
-
 ## Why we have a Driver?
 
 A driver is the code in an operating system that manages a particular device: 1. It tells the device hardware to perform operations,. 2. Configures the device to generate interrupts when done. 3. Handles the resulting interrupts,. 4. Interacts with processes that may be waiting for I/O from the device.
