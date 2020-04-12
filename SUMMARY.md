@@ -71,7 +71,6 @@
 * [Locking in Xv6](lock/locking-in-xv6.md)
 * [Concurrency in Xv6](lock/concurrency-in-xv6.md)
 * [Exercise: Socket Programming with Event loop](lock/exercise-socket-programming-with-event-loop.md)
-* [Untitled](lock/untitled-1.md)
 
 ## Labs
 

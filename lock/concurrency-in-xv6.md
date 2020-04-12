@@ -123,7 +123,9 @@ The solution is for the loop to carry the directory `inode` over to the next ite
 
 **Explain**
 
-`next = dirlookup(ip, name, 0)` calls `iget`, which increment ref count. Each iteration only release current `inode`, and set next `inode` pointer, but not acquiring next directory lock.
+`next = dirlookup(ip, name, 0)` calls `iget`, which increment ref count. 
+
+Each iteration only release current `inode`, and set next `inode` pointer, but not acquiring next directory lock.
 
 ### Other lock-like patterns
 
