@@ -6,7 +6,7 @@ Paging provides a level of indirection for addressing
 
    `VA     PA`
 
-## How a VA gets translated to PA?
+### How a VA gets translated to PA?
 
 use index bits of VA to find a page table entry \(PTE\) construct physical address using PPN from PTE + offset of VA
 
@@ -14,11 +14,11 @@ use index bits of VA to find a page table entry \(PTE\) construct physical addre
 
 one page table per address space
 
-#### RISC-V VA index
+### RISC-V VA index
 
 RISC-V maps 4-KB “pages” and aligned — start on 4 KB boundaries 4 KB = 12 bits the RISC-V used in xv6 has 64-bit for addresses thus page table index is top 64-12 = 52 bits of VA except that the top 25 of the top 52 are unused no RISC-V has that much memory now can grow in future so, **index is 27 bits.**
 
-#### what is in PTE?
+### What is in PTE?
 
 each PTE is 64 bits, but only 54 are used top 44 bits of PTE are top bits of physical address “physical page number” low 10 bits of PTE flags Present, Writeable, &c
 
@@ -26,7 +26,7 @@ each PTE is 64 bits, but only 54 are used top 44 bits of PTE are top bits of phy
 
 in RAM
 
-#### would it be reasonable for page table to just be an array of PTEs?
+#### Would it be reasonable for page table to just be an array of PTEs?
 
 No. Waste lots of memory for small program. 2^27 entry \* 64 bits = 1 GB per page table. If one address space per app, too much wasting!
 
@@ -46,7 +46,7 @@ Page fault. Transfer to kernel. Kernel could output error, kill process, or inst
 
 Each process has its own address space, and its own page table. Kernel switches page tables when switching processes.
 
-#### Jump between user program and kernel
+### Jump between user program and kernel
 
 `trampoline` and `trapframe` aren’t writable by user process. both kernel and user map `trampoline` and `trapframe` page. 
 
@@ -58,15 +58,15 @@ Two good reasons:
 
 Not easy for kernel to r/w user memory. Need translate user virtual address to kernel virtual address But good for isolation \(see spectre attacks\)
 
-## Hands on!
+### Hands on!
 
 #### Setup kernel address space
-
-#### mappages\(\)
 
 shift a physical address to the right place for a PTE. `#define PA2PTE(pa) ((((uint64)pa) >> 12) << 10)`
 
 Create PTEs for virtual addresses starting at va that refer to physical addresses starting at pa. va and size might not be page-aligned.
+
+### Code: Map physical address to virtual address
 
 ```c
 int
@@ -92,7 +92,7 @@ mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)
 }
 ```
 
-#### walk\(\)
+### Code: Walk the Pagetable to find PTE
 
 ```c
 *// Return the address of the PTE in page table pagetable*
@@ -137,7 +137,7 @@ walk(pagetable_t pagetable, uint64 va, int alloc)
 
 `PX` changes va to the current index based on level. `& 0x111111111` to set rest to 0s. The loop checks PTE entry, if it is valid, transform the PTE entry to physical address, and assign to `pageable` array. If not valid, alloca new page table, convert the physical address to PTE format, and assign to PTE’s content. Finally, returns the PTE address of level 0 for given VA.
 
-## Key Features
+### Key Features
 
 The purpose of virtual memory is **isolation**. 
 
@@ -159,7 +159,7 @@ Share kernel page tables in XV6
 
 `exec` nows loads entire file to memory, files reading is slow, and some parts are never used. The solution is to use demand paging \(Code it up!\)
 
-Reference
+#### Reference
 
 [https://pdos.csail.mit.edu/6.828/2019/lec/l-vm.txt](https://pdos.csail.mit.edu/6.828/2019/lec/l-vm.txt) 
 

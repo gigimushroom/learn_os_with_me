@@ -30,5 +30,3 @@ Read: Reference: “Understanding the Linux Kernel”, third edition - sections 
 
 For 32 bit machines: Page frames above the 896 MB boundary are not generally mapped in the fourth gigabyte of the kernel linear address spaces, so the kernel is unable to directly access them.
 
-## system/kernel/memory
-

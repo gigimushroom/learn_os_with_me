@@ -87,5 +87,3 @@ mappages(pagetable_t *pagetable*, uint64 *va*, uint64 *size*, uint64 *pa*, int *
 }
 ```
 
-## system/kernel/memory
-

@@ -53,7 +53,3 @@ Different than the kernel one. The root page-table page needs to set in satp reg
 
 {% page-ref page="part-3-how-page-table-is-used.md" %}
 
-
-
-## system/kernel/memory
-
