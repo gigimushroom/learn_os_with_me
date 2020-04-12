@@ -40,8 +40,6 @@ bd\_sizes is the buddy allocator array. Each item is sz\_info. sz\_info contains
 
 In xv6 unix, the imp is slightly different. We get memory range \(Start, end\) from kernel. We mark the meta as allocated, mark the unreachable one as allocated \(HEAPSIZE - end\). Then for remaining free memory \(P to end\), we try to divide them into each size k free list, instead of putting all into the MAXSIZE free list.
 
-## system/kernel/memory/allocator
-
 ### _Allocation_
 
 What happen when calling `bd_malloc(8)`
@@ -264,9 +262,9 @@ The key idea is:
 
 From the sample above, the meta data size was 9, round up to LEAF\_SIZE \(16 bytes\), and free memory range starts from there. In above case, size 0 got 16, size 2 got 32, 64, 128. Total is 240.
 
-### In other words, the concept is very similar to divide free memory to all free lists. Let’s assume p points to the end of first 16 bytes. Free memory range is \[p, end\).  After allocator initialization, max size free list is empty, So we have: size 4: 0, size 3: 64, size 2: 32,  size 1: 16.
+### Summary
+
+In other words, the concept is very similar to divide free memory to all free lists. Let’s assume p points to the end of first 16 bytes. Free memory range is \[p, end\).  After allocator initialization, max size free list is empty, So we have: size 4: 0, size 3: 64, size 2: 32,  size 1: 16.
 
 **The reason the memory area is 2^x is the address of each buddies are only different by 1 bit.** So it is easy to find.
-
-/END OF ALLOCATION/
 
