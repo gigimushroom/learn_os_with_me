@@ -1,8 +1,12 @@
 # XV6 Virtual Memory
 
-paging provides a level of indirection for addressing CPU -&gt; MMU -&gt; RAM VA PA
+Paging provides a level of indirection for addressing 
 
-#### How a VA gets translated to PA?
+`CPU -> MMU -> RAM` 
+
+   `VA     PA`
+
+## How a VA gets translated to PA?
 
 use index bits of VA to find a page table entry \(PTE\) construct physical address using PPN from PTE + offset of VA
 
@@ -44,13 +48,19 @@ Each process has its own address space, and its own page table. Kernel switches 
 
 #### Jump between user program and kernel
 
-trampoline and trapframe aren’t writable by user process. both kernel and user map trampoline and trapframe page. Two good reasons: 1. eases transition user -&gt; kernel and back 2. kernel doesn’t map user applications
+`trampoline` and `trapframe` aren’t writable by user process. both kernel and user map `trampoline` and `trapframe` page. 
+
+Two good reasons: 
+
+1. eases transition user -&gt; kernel and back 
+
+2. kernel doesn’t map user applications
 
 Not easy for kernel to r/w user memory. Need translate user virtual address to kernel virtual address But good for isolation \(see spectre attacks\)
 
-### Hands on!
+## Hands on!
 
-#### setup kernel address space
+#### Setup kernel address space
 
 #### mappages\(\)
 
@@ -58,7 +68,7 @@ shift a physical address to the right place for a PTE. `#define PA2PTE(pa) ((((u
 
 Create PTEs for virtual addresses starting at va that refer to physical addresses starting at pa. va and size might not be page-aligned.
 
-```text
+```c
 int
 mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)
 {
@@ -84,7 +94,7 @@ mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)
 
 #### walk\(\)
 
-```text
+```c
 *// Return the address of the PTE in page table pagetable*
 *// that corresponds to virtual address va.  If alloc!=0,*
 *// create any required page-table pages.*
@@ -118,7 +128,7 @@ walk(pagetable_t pagetable, uint64 va, int alloc)
 }
 ```
 
-```text
+```c
 *// extract the three 9-bit page table indices from a virtual address.*
 #define PXMASK          0x1FF // 9 bits. 0x111111111
 #define PXSHIFT(level)  (PGSHIFT+(9*(level)))
@@ -127,17 +137,31 @@ walk(pagetable_t pagetable, uint64 va, int alloc)
 
 `PX` changes va to the current index based on level. `& 0x111111111` to set rest to 0s. The loop checks PTE entry, if it is valid, transform the PTE entry to physical address, and assign to `pageable` array. If not valid, alloca new page table, convert the physical address to PTE format, and assign to PTE’s content. Finally, returns the PTE address of level 0 for given VA.
 
-#### procinit\(\)
+## Key Features
 
-#### setup user address space
+The purpose of virtual memory is **isolation**. 
 
-#### Why uvmalloc\(\) in vm.c calls PGROUNDUP?
+Each process has its own address space. 
 
-### Part 2
+Lazy/on-demand page allocation. 
 
-The purpose of virtual memory is **isolation**. Each process has its own address space. Lazy/on-demand page allocation. guard page to protect against stack overflow one zero-filled page Share kernel page tables in XV6 **Copy-on-write fork** **Demand paging**: on page fault, read the page from file and update page table entry. **Memory-mapped files**: Can read and write part of file. Can pay-in pages on demand, and page-out if memory is full. \(Code it up!\)
+Guard page to protect against stack overflow 
+
+one zero-filled page 
+
+Share kernel page tables in XV6 
+
+**Copy-on-write fork** 
+
+**Demand paging**: on page fault, read the page from file and update page table entry. 
+
+**Memory-mapped files**: Can read and write part of file. Can pay-in pages on demand, and page-out if memory is full. \(Code it up!\)
 
 `exec` nows loads entire file to memory, files reading is slow, and some parts are never used. The solution is to use demand paging \(Code it up!\)
 
-Ref: [https://pdos.csail.mit.edu/6.828/2019/lec/l-vm.txt](https://pdos.csail.mit.edu/6.828/2019/lec/l-vm.txt) [https://pdos.csail.mit.edu/6.828/2019/lec/l-usevm.md](https://pdos.csail.mit.edu/6.828/2019/lec/l-usevm.md)
+Reference
+
+[https://pdos.csail.mit.edu/6.828/2019/lec/l-vm.txt](https://pdos.csail.mit.edu/6.828/2019/lec/l-vm.txt) 
+
+[https://pdos.csail.mit.edu/6.828/2019/lec/l-usevm.md](https://pdos.csail.mit.edu/6.828/2019/lec/l-usevm.md)
 
