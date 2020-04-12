@@ -6,17 +6,25 @@ description: warmup and learn assembly
 
 ## Warmup: RISC-V assembly 
 
-There is a file user/call.c in your xv6 repo. **make fs.img** builds a user program call and a readable assembly version of the program in user/call.asm. Read the code in call.asm for the functions g, f, and main. The instruction manual for RISC-V is in the doc directory \(doc/riscv-spec-v2.2.pdf\).
+There is a file user/call.c in your xv6 repo. `make fs.img` builds a user program call and a readable assembly version of the program in user/call.asm. 
+
+Read the code in call.asm for the functions g, f, and main. The instruction manual for RISC-V is in the doc directory \(`doc/riscv-spec-v2.2.pdf`\).
 
 ### Questions and Answers
 
 **Which registers contain arguments to functions? For example, which register holds 13 in main’s call to printf?** 
 
-a0–a7 and fa0-fa7contains function arguments. a0 is also return values. 13 is stored in register a2
+a0–a7 and fa0-fa7contains function arguments. 
+
+a0 is also return values. 
+
+13 is stored in register a2
 
 **Where is the function call to f from main? Where is the call to g? \(Hint: the compiler may inline functions.\)** 
 
-Call to f from main `26: 45b1 li a1,12` Call to g from f `14: 250d addiw a0,a0,3`
+Call to f from main `26: 45b1     li a1,12` 
+
+Call to g from f `14: 250d         addiw a0,a0,3`
 
 **At what address is the function printf located?** 
 

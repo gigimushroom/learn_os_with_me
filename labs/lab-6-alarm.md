@@ -17,7 +17,9 @@ Add a new `sigalarm(interval, handler)` system call. If an application calls `si
 ### Hints
 
 {% hint style="info" %}
-Test code Call `sigalarm` to set up alarm so that call function `periodic` after 2 ticks. `periodic` is the handler code after alarm is fired. It calls `periodic` at the end to reset process state to before the alarm fired.
+Test code calls `sigalarm` to set up alarm so that call function `periodic` after 2 ticks. `periodic` is the handler code after alarm is fired. 
+
+It calls `sigreturn` at the end to reset process state to before the alarm fired.
 {% endhint %}
 
 {% code title="Test code" %}
@@ -27,7 +29,7 @@ periodic()
 {
   count = count + 1;
   printf("alarm!\n");
-  periodic();
+  sigreturn();
 }
 
 // tests whether the kernel calls
