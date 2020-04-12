@@ -162,13 +162,17 @@ A non-stop for loop tries to find next RUNNABLE process. Note: As soon as anothe
 
 One crucial part is lock. Scheduler will acquire a lock, then do context switch. The resumed process will release the lock. If process wants to give up CPU, it needs to acquire the lock, then scheduler is going to release the lock. The above is different than normal lock/unlock conventions. But it has to be designed this way to make context switch critical section code protected!
 
-There are 2 **invariants**: 1. If a process is running, a timer can safely switch away it. The CPU registers must hold process’s register values, and c-&gt;proc refer to it. 2. If a process is runnable, its p-&gt;context must hold its registers, no CPU is executing on the process’s kernel stack, no CPU references to it. **If above invariant is not true, that’s the place we need a lock.**
+There are 2 **invariants**: 
+
+1. If a process is running, a timer can safely switch away it. The CPU registers must hold process’s register values, and c-&gt;proc refer to it. 
+
+2. If a process is runnable, its p-&gt;context must hold its registers, no CPU is executing on the process’s kernel stack, no CPU references to it. **If above invariant is not true, that’s the place we need a lock.**
 
 Enable/Disable interrupts Values of cpuid and mycpu are fragile: if the timer were to interrupt and cause the thread to yield and then move to a different CPU, a previously returned value would no longer be correct. To avoid this problem, xv6 **requires that callers disable interrupts, and only enable them after they finish using the returned struct cpu.**
 
 Similarly, `myproc()`disable interrupts, and re-enable after invokes `mycpu()`
 
-```text
+```c
 struct proc*
 myproc(void) {
   push_off();
