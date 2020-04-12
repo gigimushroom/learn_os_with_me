@@ -1,5 +1,7 @@
 # Pipes
 
+## Overview
+
 Pipes provide a way for processes to communicate. An example running `wc` with standard input connected to the read end of pipe:
 
 ```c
@@ -23,15 +25,19 @@ if(fork() == 0) {
 
 `dup(p[0])` : The child dups the read end onto file descriptor 0. When wc reads from its standard input, it reads from the pipe.
 
-**In more details**
+## Diagram
 
 ![](../.gitbook/assets/image%20%281%29.png)
 
 close\(0\) closes the fd 0. Make it available for next request. `dup` makes fd 0 pointing pipe read side. `fd` is just an index within process, points to a file opened by process. `fd` could be changed to point to different file. Any program wants to read from fd 0 \(standard input\) now read from pipe read side.
 
+## Pipe Read, Write, Close
+
 #### Read side of pipe
 
-If no data is available, a read on a pipe waits for either data to be written or all file descriptors referring to the write end to be closed;
+If no data is available, a read on a pipe waits for either data to be written or all file descriptors referring to the write end to be closed.
+
+#### Pipe close
 
 When all file descriptors for write side of pipe closed, the pipe write side is considered to be closed. It wakens up read side to perform one more read. If buffer contains nothing, `piperead` returns 0 just like EOF.
 
@@ -55,7 +61,9 @@ pipeclose(struct pipe *pi, int writable)
 }
 ```
 
-#### How shell implements pipelines
+{% page-ref page="../scheduling/how-unix-pipes-work.md" %}
+
+## How shell implements pipelines
 
 ```c
   case PIPE:
@@ -83,5 +91,5 @@ pipeclose(struct pipe *pi, int writable)
     break;
 ```
 
-`echo hi | wc` left side writes to fd1. Right side reads from fd 0.
+`echo hi | wc` left side writes to `fd` `1`. Right side reads from `fd 0`.
 
