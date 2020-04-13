@@ -4,7 +4,7 @@
 
 {% page-ref page="../untitled-3.md" %}
 
-{% page-ref page="./" %}
+{% page-ref page="../untitled-2.md" %}
 
 ## Traps from Kernel Space
 
