@@ -22,6 +22,15 @@ How do we make sure process page tables and kernel’s page table not pointing t
 * By using MMU, translate the virtual memory to physical memory address. \(See page tables Part 1 for details\)
 * Note: satp register stores one root page table only. 
 
+{% hint style="info" %}
+**User space to kernel space needs switching process page table to kernel page table.**   
+
+
+**Context switch between process save/restore registers. It is handled by the kernel, so the page table is switched among processes.**
+
+**Example: Timer interrupt on P1. Page table is switched from P1’s to kernel’s. Then the CPU scheduler finds another P2 to run. P2 page table is reset when returning from kernel space to P2 user space.**
+{% endhint %}
+
 ### **Ask yourself** 
 
 1. How MMU work 
