@@ -1,7 +1,5 @@
 # What does kernel.ld do in XV6?
 
-## system/kernel/boot
-
 There is a kernel.ld file in xv6.
 
 ```text
